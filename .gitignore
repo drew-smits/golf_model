@@ -6,5 +6,5 @@ golfsim/sim/Cargo.lock
 # directories
 local/
 venv/
-golfsim/sim/target
-__pycache__
+golfsim/sim/target/
+__pycache__/
