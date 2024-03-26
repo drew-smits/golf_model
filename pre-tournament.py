@@ -94,4 +94,4 @@ print(df.head())
 
 save = input('Save results? y/n: ')
 if save == 'y':
-    db.update_player_predictions(df, tournament_id)
+    db.update_player_predictions(df)

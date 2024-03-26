@@ -20,8 +20,8 @@ db.update_sim_tournaments(db.simTournaments.get_df([
     int(tourn['start_date'].replace('-', '')),
     config.tsg_tour,
     int(tourn['event_id']),
-    config.cutLine,
-    config.cutRound,
+    config.cut_line,
+    config.cut_round,
     str(purse)
 ]))
 log.info(f'Updating tournament info complete. ({time.perf_counter() - t}s)')
@@ -43,8 +43,6 @@ df_player_names = db.get_player_names()
 idx = 0
 for plr in players['dg_id']:
     idx += 1
-    if len(players) - idx > 84:
-        continue
     name = df_player_names.loc[df_player_names['dg_id'] == plr]['player_name'].values[0]
     log.info(f'Updating Round history for {name}. {len(players) - idx} remaining.')
     num_rounds = db.update_player_rounds(api, plr)
