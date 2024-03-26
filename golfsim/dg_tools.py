@@ -1,6 +1,6 @@
 from datetime import date
 import requests
-import utils
+from . import utils
 import json
 from local import keys
 

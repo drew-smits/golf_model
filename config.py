@@ -1,5 +1,5 @@
 import os
-import utils
+from golfsim import utils
 
 
 # Tournament specific config
@@ -18,8 +18,7 @@ decayOffset = 100
 min_rounds = 25
 
 # File paths
-db_filename = 'local/golfmodel.db'
-
+db_filename = os.path.join('local', 'golfmodel.db')
 
 # Update config
 updateWaitTime = 5

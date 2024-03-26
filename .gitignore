@@ -1,10 +1,10 @@
 # files
 config.py
-golfsim/Cargo.lock
+golfsim/sim/Cargo.lock
 .DS_Store
 
 # directories
 local/
 venv/
-golfsim/target
+golfsim/sim/target
 __pycache__

@@ -1,10 +1,10 @@
 [package]
-name = "golfsim"
+name = "sim"
 version = "0.1.0"
 edition = "2021"
 
 [lib]
-name = "golfsim"
+name = "sim"
 crate-type = ["cdylib"]
 
 [dependencies]

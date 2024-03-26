@@ -289,7 +289,7 @@ impl Sim {
 }
 
 #[pymodule]
-fn golfsim(_py: Python, m: &PyModule) -> PyResult<()> {
+fn sim(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_class::<Sim>()?;
     Ok(())
 }

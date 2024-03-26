@@ -1,9 +1,7 @@
 import config
 import time
 import logging
-import dg_tools as dg
-import pga_tools
-import db_tools
+from golfsim import dg_tools as dg, pga_tools, db_tools
 
 log = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)

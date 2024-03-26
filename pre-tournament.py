@@ -1,13 +1,9 @@
 import time
 import config
 import logging
-import db_tools
-import utils
 from datetime import date
 import pandas as pd
-import golfsim
-import pga_tools
-
+from golfsim import db_tools, pga_tools, sim, utils
 
 log = logging.getLogger(__name__)
 if config.debug:
@@ -20,7 +16,7 @@ if config.debug:
     logging.basicConfig(filename=filename, level=level)
 
 db = db_tools.DB_Interface(config.db_filename)
-s = golfsim.Sim(config.num_sims, config.num_rounds, config.cut_round, config.cut_line)
+s = sim.Sim(config.num_sims, config.num_rounds, config.cut_round, config.cut_line)
 s.set_purse(pga_tools.get_purse_breakdown(config.pga_purse_url))
 
 log.info('Loading player list...')

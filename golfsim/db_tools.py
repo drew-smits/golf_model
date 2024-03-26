@@ -1,7 +1,6 @@
 import sqlite3
 import pandas as pd
-import utils
-
+from . import utils
 
 def list_to_query_string(items):
     s = ''
