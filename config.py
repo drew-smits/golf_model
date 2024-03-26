@@ -4,7 +4,7 @@ import utils
 
 # Tournament specific config
 tsg_tour = 'pga'
-pga_purse_url = 'https://www.pgatour.com/article/news/latest/2024/03/18/prize-money-purse-breakdown-valspar-championship-innisbrook-copperhead-course'
+pga_purse_url = 'https://www.pgatour.com/article/news/latest/2024/03/25/prize-money-purse-breakdown-texas-childrens-houston-open-memorial-park'
 cut_line = 65
 cut_round = 2
 
