@@ -13,7 +13,7 @@ Move into the newly created directory with "cd golf_model". Create a python virt
 Run the command "pip install -r requirements.txt"
 
 ### Create database
-TODO
+Run the create_db.py script.
 
 ### Build rust package
 If you haven't already installed rust, follow the instructions at https://www.rust-lang.org/tools/install. Navigate to the directory golfsim in your terminal/command prompt. Run the command "maturin develop --release".
