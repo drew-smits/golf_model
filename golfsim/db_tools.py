@@ -78,7 +78,9 @@ class Table:
             s += f'{self.columns[0]} {self.dtypes[0]} PRIMARY KEY, '
         for i in range(1, len(self.columns)):
             s += f'{self.columns[i]} {self.dtypes[i]}, '
+        s = s[:-2]
         if len(self.foreign_keys) > 0:
+            s += ', '
             for key in self.foreign_keys:
                 s += f'FOREIGN KEY({key}) REFERENCES {self.foreign_keys[key]}, '
         s = s[:-2] + ')'
@@ -87,16 +89,16 @@ class Table:
 
 class SimTournaments(Table):
     table_name = 'Sim_Tournaments'
-    columns = ['name', 'start_date', 'tour', 'dg_ekey', 'cut_line', 'cut_round', 'purse']
-    dtypes = ['TEXT', 'INTEGER', 'TEXT', 'INTEGER', 'INTEGER', 'INTEGER', 'TEXT']
+    columns = ['id', 'name', 'start_date', 'tour', 'dg_ekey', 'cut_line', 'cut_round', 'purse']
+    dtypes = ['INTEGER', 'TEXT', 'INTEGER', 'TEXT', 'INTEGER', 'INTEGER', 'INTEGER', 'TEXT']
     index_name = 'id'
 
 
 class RoundHistory(Table):
     table_name = 'Round_History'
-    columns = ['dg_id', 'sg_total', 'sg_putt', 'sg_arg', 'sg_app', 'sg_ott', 'score', 'round_num', 'fin_numeric',
+    columns = ['id', 'dg_id', 'sg_total', 'sg_putt', 'sg_arg', 'sg_app', 'sg_ott', 'score', 'round_num', 'fin_numeric',
                'fin_text', 'tour', 'course_id', 'date', 'sim_tournament_id']
-    dtypes = ['INTEGER', 'FLOAT', 'FLOAT', 'FLOAT', 'FLOAT', 'FLOAT', 'INTEGER', 'INTEGER', 'INTEGER', 'TEXT', 'TEXT',
+    dtypes = ['INTEGER', 'INTEGER', 'FLOAT', 'FLOAT', 'FLOAT', 'FLOAT', 'FLOAT', 'INTEGER', 'INTEGER', 'INTEGER', 'TEXT', 'TEXT',
               'INTEGER', 'INTEGER', 'INTEGER']
     index_name = 'id'
     dg_columns = ['dg_id', 'total', 'putt', 'arg', 'app', 'ott', 'round_score', 'round_num', 'fin_numeric',
@@ -110,8 +112,8 @@ class RoundHistory(Table):
 
 class Courses(Table):
     table_name = 'Courses'
-    columns = ['name']
-    dtypes = ['TEXT']
+    columns = ['id', 'name']
+    dtypes = ['INTEGER', 'TEXT']
     index_name = 'id'
 
 
@@ -142,13 +144,13 @@ class CurrentDGPred(Table):
 
 class TournamentPlayerPredictions(Table):
     table_name = 'Tournament_Player_Predictions'
-    columns = ['sim_tournament_id', 'dg_id', 'x_earnings', 'sim_win', 'sim_top5', 'sim_top10', 'sim_top20',
+    columns = ['id', 'sim_tournament_id', 'dg_id', 'x_earnings', 'sim_win', 'sim_top5', 'sim_top10', 'sim_top20',
                'sim_made_cut', 'x_finish', 'sg_index', 'sg_sd', 'sim_date']
-    dtypes = ['INTEGER', 'INTEGER', 'FLOAT', 'FLOAT', 'FLOAT', 'FLOAT', 'FLOAT', 'FLOAT', 'FLOAT', 'FLOAT', 'FLOAT',
+    dtypes = ['INTEGER', 'INTEGER', 'INTEGER', 'FLOAT', 'FLOAT', 'FLOAT', 'FLOAT', 'FLOAT', 'FLOAT', 'FLOAT', 'FLOAT', 'FLOAT',
               'INTEGER']
     foreign_keys = {
-        'sim_tournament_id': 'SimTournaments(id)',
         'dg_id': 'Players(dg_id)',
+        'sim_tournament_id': 'SimTournaments(id)'
     }
     index_name = 'id'
 

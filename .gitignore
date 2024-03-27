@@ -8,3 +8,4 @@ local/
 venv/
 golfsim/sim/target/
 __pycache__/
+.idea/
