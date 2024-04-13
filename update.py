@@ -41,7 +41,10 @@ df_player_names = db.get_player_names()
 idx = 0
 for plr in players['dg_id']:
     idx += 1
-    name = df_player_names.loc[df_player_names['dg_id'] == plr]['player_name'].values[0]
+    if plr in df_player_names['dg_id'].values:
+        name = df_player_names.loc[df_player_names['dg_id'] == plr]['player_name'].values[0]
+    else:
+        name = plr
     log.info(f'Updating Round history for {name}. {len(players) - idx} remaining.')
     num_rounds = db.update_player_rounds(api, plr)
     log.info(f'Updated {num_rounds} rounds for {name}.')

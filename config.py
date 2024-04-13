@@ -4,8 +4,8 @@ from golfsim import utils
 
 # Tournament specific config
 tsg_tour = 'pga'
-pga_purse_url = 'https://www.pgatour.com/article/news/latest/2024/03/25/prize-money-purse-breakdown-texas-childrens-houston-open-memorial-park'
-cut_line = 65
+pga_purse_url = 'https://www.pgatour.com/article/news/latest/2023/04/08/the-masters-tournament-prize-money-breakdown'
+cut_line = 50
 cut_round = 2
 
 # Sim config

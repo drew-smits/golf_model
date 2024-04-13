@@ -2,6 +2,7 @@
 config.py
 golfsim/sim/Cargo.lock
 .DS_Store
+db_management.py
 
 # directories
 local/

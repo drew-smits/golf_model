@@ -36,10 +36,14 @@ class Table:
     def get_df(self, data=None):
         if data is None:
             data = []
-        if len(data) > 0:
-            df = pd.DataFrame(columns=self.columns, data=[data])
+        if self.auto_incr_index:
+            col = self.columns[1:]
         else:
-            df = pd.DataFrame(columns=self.columns)
+            col = self.columns
+        if len(data) > 0:
+            df = pd.DataFrame(columns=col, data=[data])
+        else:
+            df = pd.DataFrame(columns=col)
         df.index.name = self.index_name
         return df
 
@@ -244,6 +248,11 @@ class DB_Interface:
 
     def update_dg_pred(self, api, tour=None):
         df = pd.DataFrame(api.get_player_skill_decomp(tour)['players'])
+        
+        # TODO: Keep? DG json data can contain new columns e.g. major_adjustment
+        col = [i for i in df.columns if i not in CurrentDGPred.columns]
+        df = df.drop(columns=col)
+
         self.currentDGPred.replace_df(df, self.conn)
 
     def update_player_names(self, api):
@@ -252,14 +261,18 @@ class DB_Interface:
         self.players.append_df(df, self.conn)
 
     def update_player_rounds(self, api, dg_id):
-        df = pd.DataFrame(api.get_player_profile(dg_id)['data'])
+        player_profile = api.get_player_profile(dg_id)
+        if player_profile['dg_id'] != dg_id:
+            return 0
+        df = pd.DataFrame(player_profile['data'])
         col = [i for i in df.columns if i not in RoundHistory.dg_columns]
         df = df.drop(columns=col)
         df['date'] = [utils.text_date_to_int(d) for d in df['date']]
         df = df[~df['date'].isin(self.get_player_rounds([dg_id], ['date']).astype('int64')['date'])]
         if df.empty:
             return 0
-        df = df.rename(columns=dict(zip(RoundHistory.dg_columns, RoundHistory.columns)))
+        # TODO: get rid of colums[1:] - id column
+        df = df.rename(columns=dict(zip(RoundHistory.dg_columns, RoundHistory.columns[1:])))
         df_courses = self.courses.get_df()
         df_courses['name'] = df['course_id']
         self.update_courses(df_courses)
