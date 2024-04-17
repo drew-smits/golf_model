@@ -19,16 +19,16 @@ def get_purse_breakdown(url):
         for row in rows:
             cells = row.find_all(['td', 'th'])
             cell_data = [cell.get_text(strip=True) for cell in cells]
-            # try:
-            #     pay_breakdown[int(cell_data[0])] = utils.dollars_to_int(cell_data[2])
-            # except ValueError:
-            #     pass
-
-            # TEMP for masters
             try:
-                pay_breakdown[int(cell_data[0][:-2])] = utils.dollars_to_int(cell_data[1])
-                pay_breakdown[int(cell_data[2][:-2])] = utils.dollars_to_int(cell_data[3])
+                pay_breakdown[int(cell_data[0])] = utils.dollars_to_int(cell_data[2])
             except ValueError:
                 pass
+
+            # TEMP for masters
+            # try:
+            #     pay_breakdown[int(cell_data[0][:-2])] = utils.dollars_to_int(cell_data[1])
+            #     pay_breakdown[int(cell_data[2][:-2])] = utils.dollars_to_int(cell_data[3])
+            # except ValueError:
+            #     pass
 
     return pay_breakdown
